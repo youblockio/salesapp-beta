@@ -2,7 +2,7 @@ import React from "react";
 import image69 from "../assets/image69.png"
 import styles from "./Page.module.css";
 
-const Page3 = () => {
+const Page3 = ({mode}) => {
   return (
     <>
       <div

@@ -102,6 +102,27 @@ h4 {
   margin-top: 60px;
 }
 
+select {
+  padding: 5px 0px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style the option elements */
+option {
+  background-color: rgb(79, 175, 11);
+}
+
+/* Style the dropdown arrow */
+select:after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
 @media only screen and (max-width: 530px) {
   h2 {
     margin-left: 0;

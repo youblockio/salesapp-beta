@@ -6,8 +6,8 @@ function App() {
   return (
     <>
       <Page/>
-      <Page3 />
-      <Page4 />
+      {/* <Page3 /> */}
+      {/* <Page4 /> */}
     </>
       
     

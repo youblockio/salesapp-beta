@@ -283,7 +283,16 @@ const Page = () => {
               échafaudage, élévateur(s ), équipements individuels …
             </h4>
           </div>
-          <div className={styles.div_08}></div>
+          <div className={styles.div_08}>
+          <input
+          style={{
+            marginLeft: '20px',
+            marginTop: '20px',
+            width: '140px',
+            height: '30px',
+            borderRadius: '12px'
+          }} />&nbsp; € HT
+          </div>
         </div>
         <div className={styles.line_02}></div>
         <div className={styles.div_09}>
@@ -301,7 +310,16 @@ const Page = () => {
               Bilan carbone fournis.
             </h4>
           </div>
-          <div className={styles.div_08}></div>
+          <div className={styles.div_08}>
+          <input
+          style={{
+            marginLeft: '20px',
+            marginTop: '20px',
+            width: '140px',
+            height: '30px',
+            borderRadius: '12px'
+          }} />&nbsp; € HT
+          </div>
         </div>
         <div className={styles.line_02}></div>
         <div className={styles.div_09}>
@@ -320,7 +338,16 @@ const Page = () => {
               décennale incluse fournie au début et fin de chan
             </h4>
           </div>
-          <div className={styles.div_08}></div>
+          <div className={styles.div_08}>
+          <input
+          style={{
+            marginLeft: '20px',
+            marginTop: '20px',
+            width: '140px',
+            height: '30px',
+            borderRadius: '12px'
+          }} />&nbsp; € HT
+          </div>
         </div>
         <div className={styles.line_02}></div>
         <div className={styles.div_09}>
@@ -339,7 +366,16 @@ const Page = () => {
               électrique AC/DC, connectique et câblages
             </h4>
           </div>
-          <div className={styles.div_08}></div>
+          <div className={styles.div_08}>
+          <input
+          style={{
+            marginLeft: '20px',
+            marginTop: '20px',
+            width: '140px',
+            height: '30px',
+            borderRadius: '12px'
+          }} />&nbsp; € HT
+          </div>
         </div>
         <div className={styles.line_02}></div>
         <div className={styles.div_09}>
@@ -357,7 +393,16 @@ const Page = () => {
               de contrôle SOCOTEC, CONSUEL, Attestation ENR comprise
             </h4>
           </div>
-          <div className={styles.div_11}></div>
+          <div className={styles.div_11}>
+          <input
+          style={{
+            marginLeft: '20px',
+            marginTop: '20px',
+            width: '140px',
+            height: '30px',
+            borderRadius: '12px'
+          }} />&nbsp; € HT
+          </div>
         </div>
         <div className={styles.line_02}></div>
 

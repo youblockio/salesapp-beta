@@ -123,6 +123,29 @@ select:after {
   transform: translateY(-50%);
 }
 
+
+/* Set the background color and border of the button */
+.downloadButton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  margin-left: 45%;
+  border-radius: 10px;
+}
+
+/* On hover, change the background color of the button */
+.downloadButton:hover {
+  background-color: #3e8e41;
+}
+
+
 @media only screen and (max-width: 530px) {
   h2 {
     margin-left: 0;

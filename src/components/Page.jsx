@@ -15,8 +15,10 @@ import hpk from '../assets/hpk_single_phase_1mppt.png';
 import hps from '../assets/hps_single_phase_2mppts.png';
 import hpt_2 from '../assets/hpt_three_phase_2mppts.png';
 import hpt_4 from '../assets/hpt_three_phase_4mppts.png';
+import image09 from '../assets/image09.png';
 
 import styles from './Page.module.css';
+import jsPDF from 'jspdf';
 
 const inverterImage = {
   'hpk single phase 1mppt':hpk,
@@ -67,10 +69,19 @@ const Page = () => {
     setInverter(e.target.value);
   }
 
+  const generatePdf =()=>{
+    var doc = new jsPDF("p","pt","a2");
+    doc.html(document.querySelector('#main'),{
+      callback:function(pdf){
+        pdf.save('invoice.pdf');
+      }
+    })
+  }
+
 
 
   return (
-    <>
+    <div id='main'>
       <div>
         <img src={image01} className={styles.image_01}></img>
         <div className={styles.input_01}>
@@ -359,7 +370,7 @@ const Page = () => {
                 marginRight: '30%',
               }}
             >
-              ONDULEUR : HUAWEI SUN 2000 100TL M1 garanti 5 ans (10 ans avec
+              ONDULEUR :{inverter} garanti 5 ans (10 ans avec
               notre contrat de maintenance), Suivi à distance et plateforme
               intégrée. Fourniture et pos e d'un TGBT photovoltaïque Liaison DC
               comprise. Équipotentialité comprise Coffret de protection
@@ -479,7 +490,51 @@ const Page = () => {
         {solarPanelImage[panel] && <img style={{width:'100%'}} src={solarPanelImage[panel]} alt='solar-panel-image'/>}
         {inverterImage[inverter] && <img style={{width:'100%'}} src={inverterImage[inverter]} alt='inverter-image'/>}
       </div>
-    </>
+      <div style={{backgroundColor:'#1d1d1d', marginBottom:0,paddingBottom:100}}>
+        <img src={image09} style={{width:'100%'}} />
+        <h3
+            style={{
+              // display: 'flex',
+              alignItems: 'center',
+              color:'white',
+              marginLeft:100
+            }}
+          >
+            <label htmlFor='name'>Name:</label>
+            <input
+              id='name'
+              type='text'
+              className={styles.input}
+              style={{ padding: '5px',width:'20%' }}
+            ></input>
+            <label htmlFor='phone'>Title:</label>
+            <input
+              id='title'
+              type='text'
+              className={styles.input}
+              style={{ padding: '5px',width:'20%' }}
+            ></input>
+            <label htmlFor='phone'>Phone:</label>
+            <input
+              id='phone'
+              type='text'
+              className={styles.input}
+              style={{ padding: '5px',width:'20%' }}
+            ></input>
+            <label htmlFor='email'>Email:</label>
+            <input
+              id='email'
+              type='text'
+              className={styles.input}
+              style={{ padding: '5px',width:'20%' }}
+            ></input>
+          </h3>
+          <div>
+            <button className={styles.downloadButton} onClick={generatePdf}>Download</button>
+          </div>
+         
+      </div>
+    </div>
   );
 };
 

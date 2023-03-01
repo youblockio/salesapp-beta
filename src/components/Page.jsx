@@ -70,13 +70,24 @@ const Page = () => {
   }
 
   const generatePdf =()=>{
-    var doc = new jsPDF("p","pt","a2");
+    var doc = new jsPDF({
+      orientation: 'p',
+      unit: 'pt',
+      format: 'a2',
+    });
     doc.html(document.querySelector('#main'),{
       callback:function(pdf){
         pdf.save('invoice.pdf');
       }
     })
   }
+
+  // const generatePdf = () => {
+  //   const pdf = new jsPDF();
+  //   pdf.html(document.querySelector('#main'));
+  //   pdf.save('testInvoice')
+
+  // }
 
 
 

@@ -131,7 +131,7 @@ const InvoicePage = () => {
       
     }).then((canvas) => {
       const imgWidth = pageWidth;
-      const imgHeight = (10500 * imgWidth) / canvas.width;
+      const imgHeight = (9500 * imgWidth) / canvas.width;
       const imgData = canvas.toDataURL("image/png", 0.5); // Use a quality of 0.5 (50%)
       let yOffset = 0;
       const pageData = canvas.toDataURL("image/jpeg", 1.0);
@@ -447,10 +447,10 @@ const InvoicePage = () => {
             style={{
               backgroundColor: "#1d1d1d",
               marginBottom: 0,
-              paddingBottom: 100,
+              paddingBottom: 0,
             }}
           >
-            <img src={image09} style={{ width: "100%" }} />
+            <img src={image09} style={{ width: "100%", height: "120vh" }} />
             <div
               style={{
                 // display: 'flex',

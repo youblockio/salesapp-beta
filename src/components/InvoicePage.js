@@ -131,7 +131,7 @@ const InvoicePage = () => {
       
     }).then((canvas) => {
       const imgWidth = pageWidth;
-      const imgHeight = (9500 * imgWidth) / canvas.width;
+      const imgHeight = (10500 * imgWidth) / canvas.width;
       const imgData = canvas.toDataURL("image/png", 0.5); // Use a quality of 0.5 (50%)
       let yOffset = 0;
       const pageData = canvas.toDataURL("image/jpeg", 1.0);

@@ -383,6 +383,10 @@
         margin-top: 1vh;
         font-size: 0.8rem;
     }
+    .onchange-filter{
+        width: 12vw;
+        height: 3vh;
+    }
 }
 
 @media screen and (max-width: 590px){

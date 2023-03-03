@@ -196,7 +196,7 @@ const InvoicePage = () => {
         <div className="section_3-text-1">DETAIL TECHNIQUE SOLAIRE:</div>
         <div className="section_3-select-div">
           PANNEAU SOLAIRE &nbsp;
-          <select onChange={panelHandler}>
+          <select onChange={panelHandler} className="onchange-filter">
             <option value="select">select</option>
             <option value="yb 360-385m6">yb 360-385m6</option>
             <option value="yb 120m (166)">yb 120m (166)</option>
@@ -212,7 +212,7 @@ const InvoicePage = () => {
 
         <div className="section_3-select-div">
           ONDULEUR &nbsp;
-          <select onChange={inverterHandler}>
+          <select onChange={inverterHandler} className="onchange-filter">
             <option value="select">select</option>
             <option value="hpk single phase 1mppt">
               hpk single phase 1mppt
@@ -237,7 +237,7 @@ const InvoicePage = () => {
             </option>
           </select>{" "}
           &nbsp; X &nbsp;
-          <input /> PCS &nbsp;
+          <input className="onchange-filter"/> PCS &nbsp;
         </div>
         <div className="section_3-list-div">
           <ol style={{ listStyleType: "disc", paddingLeft: "9vw" }}>

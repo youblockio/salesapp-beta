@@ -18,6 +18,7 @@ import hpt_4 from "../assets/hpt_three_phase_4mppts.png";
 import image09 from "../assets/image09.png";
 import "../components/InvoicePage.css";
 import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 const inverterImage = {
   "hpk single phase 1mppt": hpk,
@@ -71,7 +72,7 @@ const InvoicePage = () => {
     var doc = new jsPDF({
       orientation: "p",
       unit: "pt",
-      format: "a4",
+      format: "c1",
     });
     doc.html(document.querySelector("#main"), {
       callback: function (pdf) {
@@ -79,6 +80,68 @@ const InvoicePage = () => {
       },
     });
   };
+
+  // const exportPdf = () => {
+  //   const input = document.getElementById("main")
+  //   html2canvas(input, {logging: true, letterRendering: 2, useCORS: true}).then(canvas =>{
+  //     const imgWidth = 308;
+  //     const imgHeight = canvas.height * imgWidth / canvas.width;
+  //     const imgData = canvas.toDataURL('img/png');
+  //     const pdf = new jsPDF("p", "pt", "a4");
+  //     pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+  //     pdf.save("test.pdf");
+  //   })
+  // }
+
+  // const exportPdf = () => {
+  //   const input = document.getElementById("main");
+  //   const pdf = new jsPDF();
+  //   const pageWidth = pdf.internal.pageSize.getWidth();
+  //   const pageHeight = pdf.internal.pageSize.getHeight();
+  //   html2canvas(input, {logging: true, letterRendering: 2, useCORS: true}).then(canvas =>{
+  //     const imgWidth = pageWidth;
+  //     const imgHeight = canvas.height * imgWidth / canvas.width;
+  //     const imgData = canvas.toDataURL('image/png');
+  //     let yOffset = 0;
+  //     const pageData = canvas.toDataURL('image/jpeg', 1.0);
+  //     const totalPages = Math.ceil(canvas.height / pageHeight);
+  //     for(let i = 1; i <= totalPages; i++) {
+  //       pdf.addImage(pageData, 'JPEG', 0, yOffset, imgWidth, imgHeight);
+  //       yOffset -= pageHeight;
+  //       if(i !== totalPages) {
+  //         pdf.addPage();
+  //       }
+  //     }
+  //     pdf.save("test.pdf");
+  //   });
+  // };
+
+  const exportPdf = () => {
+    const input = document.getElementById("main");
+    const pdf = new jsPDF();
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const htmlContent = input.innerHTML.trim(); // Trim the HTML content
+    html2canvas(input, {logging: true, letterRendering: 2, useCORS: true, scrollY: -window.scrollY}).then(canvas =>{
+      const imgWidth = pageWidth;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const imgData = canvas.toDataURL('image/png');
+      let yOffset = 0;
+      const pageData = canvas.toDataURL('image/jpeg', 1.0);
+      const totalPages = Math.ceil(canvas.height / pageHeight);
+      for(let i = 1; i <= totalPages; i++) {
+        pdf.addImage(pageData, 'JPEG', 0, yOffset, imgWidth, imgHeight);
+        yOffset -= pageHeight;
+        if (i < totalPages) {
+          pdf.addPage();
+        }
+      }
+      pdf.save("test.pdf");
+    });
+  };
+  
+  
+  
 
   const handlePrint = () => {
     window.print();
@@ -410,7 +473,7 @@ const InvoicePage = () => {
             ></input>
           </div>
           <div>
-            <button className="download-button" onClick={handlePrint}>
+            <button className="download-button" onClick={() => exportPdf()}>
               Print
             </button>
           </div>

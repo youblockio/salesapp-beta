@@ -127,7 +127,7 @@ const InvoicePage = () => {
       letterRendering: 1,
       useCORS: true,
       scrollY: -window.scrollY,
-      dpi: 60,
+      dpi: 300,
       
     }).then((canvas) => {
       const imgWidth = pageWidth;
@@ -474,7 +474,7 @@ const InvoicePage = () => {
       </div>
       <div className="button-div">
         <button className="download-button" onClick={() => exportPdf()}>
-          Print
+          Export Invoice
         </button>
       </div>
     </div>

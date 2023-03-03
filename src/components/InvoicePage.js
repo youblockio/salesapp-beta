@@ -118,17 +118,18 @@ const InvoicePage = () => {
 
   const exportPdf = () => {
     const input = document.getElementById("main");
-    const pdf = new jsPDF();
+    const pdf = new jsPDF({ compress: true });
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
     const htmlContent = input.innerHTML.trim(); // Trim the HTML content
-    html2canvas(input, {logging: true, letterRendering: 2, useCORS: true, scrollY: -window.scrollY}).then(canvas =>{
+    html2canvas(input, {logging: true, letterRendering: 2, useCORS: true, scrollY: -window.scrollY, dpi: 72}).then(canvas =>{
       const imgWidth = pageWidth;
       const imgHeight = canvas.height * imgWidth / canvas.width;
-      const imgData = canvas.toDataURL('image/png');
+      const imgData = canvas.toDataURL('image/png', 0.5); // Use a quality of 0.5 (50%)
       let yOffset = 0;
       const pageData = canvas.toDataURL('image/jpeg', 1.0);
       const totalPages = Math.ceil(canvas.height / pageHeight);
+      pdf.setFont('helvetica', '', 'StandardEncoding'); // Use Standard Encoding for text compression
       for(let i = 1; i <= totalPages; i++) {
         pdf.addImage(pageData, 'JPEG', 0, yOffset, imgWidth, imgHeight);
         yOffset -= pageHeight;
@@ -136,9 +137,10 @@ const InvoicePage = () => {
           pdf.addPage();
         }
       }
-      pdf.save("test.pdf");
+      pdf.save("invoice.pdf");
     });
   };
+  
   
   
   

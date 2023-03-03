@@ -131,11 +131,11 @@ const InvoicePage = () => {
       
     }).then((canvas) => {
       const imgWidth = pageWidth;
-      const imgHeight = (11000 * imgWidth) / canvas.width;
+      const imgHeight = (9500 * imgWidth) / canvas.width;
       const imgData = canvas.toDataURL("image/png", 0.5); // Use a quality of 0.5 (50%)
       let yOffset = 0;
       const pageData = canvas.toDataURL("image/jpeg", 1.0);
-      const totalPages = Math.ceil(10000 / 1500);
+      const totalPages = Math.ceil(13000 / 1500);
       pdf.setFont("helvetica", "", "StandardEncoding"); // Use Standard Encoding for text compression
       for (let i = 1; i < totalPages; i++) {
         pdf.addImage(pageData, "JPEG", 0, yOffset, imgWidth, imgHeight);

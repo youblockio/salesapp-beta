@@ -481,6 +481,10 @@
     width: 100%;
     height: 180vh;
   }
+  .solarpanelImage{
+    width: 100%;
+    height: 130vh;
+  }
 }
 
 /* mobile css */
@@ -803,6 +807,10 @@
     color: white;
     font-size: 0.8rem;
     cursor: pointer;
+  }
+  .solarpanelImage{
+    width: 100%;
+    height: 76vh;
   }
 }
 

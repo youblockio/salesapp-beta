@@ -71,46 +71,42 @@ const InvoicePage = () => {
   
 
   const exportPdf = () => {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     const pdf = new jsPDF("p", "mm", [210, 297],{ compress: true } );
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
     const sections = document.querySelectorAll(".section"); // Get all the sections
-  
+    
     pdf.setFont("helvetica", "", "StandardEncoding"); // Use Standard Encoding for text compression
-  
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-const addSectionToPdf = (section) => {
-  return new Promise((resolve, reject) => {
-    const htmlContent = section.innerHTML.trim();
-    const sectionHeight = section.offsetHeight;
-    let settings = {
-      logging: true,
-      letterRendering: 1,
-      useCORS: true,
-      scrollY: -window.scrollY,
-      dpi: 300,
-      scale: 1,
+    
+    const addSectionToPdf = (section) => {
+      return new Promise((resolve, reject) => {
+        const htmlContent = section.innerHTML.trim(); // Trim the HTML content
+        const sectionHeight = section.offsetHeight;
+        
+        // Set image quality and scale factor based on device type
+        const imgQuality = isMobile ? 2 : 0.5;
+        const scale = isMobile ? 3 : pageWidth / section.offsetWidth;
+        
+        html2canvas(section, {
+          logging: true,
+          letterRendering: 1,
+          useCORS: true,
+          scrollY: -window.scrollY,
+          dpi: isMobile ? 600 : 300, // Set dpi based on device type
+        }).then((canvas) => {
+          const imgWidth = pageWidth;
+          const imgHeight = (sectionHeight * imgWidth) / canvas.width;
+          const imgData = canvas.toDataURL("image/png", imgQuality);
+          const pageData = canvas.toDataURL("image/jpeg", 1.0);
+          
+          pdf.addImage(pageData.split(',')[1], "JPEG", 0, 0, pageWidth, pageHeight, null, null, null, null, null, { scale });
+          resolve();
+        });
+      });
     };
-    if (isMobile) {
-      // Apply different settings for mobile devices
-      settings.dpi = 600;
-      settings.scale = 2;
-      settings.useCORS = false;
-    }
-    html2canvas(section, settings).then((canvas) => {
-      const imgWidth = pageWidth;
-      const imgHeight = (sectionHeight * imgWidth) / canvas.width;
-      const imgData = canvas.toDataURL("image/png", 0.5);
-      const pageData = canvas.toDataURL("image/jpeg", 1.0);
-      const scale = pageWidth / canvas.width * settings.scale;
-      pdf.addImage(pageData, "PNG", 0, 0, 211, 298, null, null, null, null, null, { scale });
-      resolve();
-    });
-  });
-};
-
-  
+    
     const addSectionsToPdf = (sectionsArray, index, pageCount) => {
       if (index >= sectionsArray.length || pageCount >= 6) { // stop after adding 6 sections
         pdf.save("document.pdf");
@@ -124,6 +120,7 @@ const addSectionToPdf = (section) => {
     
     addSectionsToPdf(sections, 0, 0); // start with pageCount 0
   };
+  
   
 
   return (
@@ -410,14 +407,17 @@ const addSectionToPdf = (section) => {
         <div className="section">
           {solarPanelImage[panel] && (
             <img
-              style={{ width: "100%" }}
+              className="solarpanelImage"
               src={solarPanelImage[panel]}
               alt="solar-panel-image"
             />
           )}
-          {inverterImage[inverter] && (
+          
+        </div>
+        <div className="section">
+        {inverterImage[inverter] && (
             <img
-              style={{ width: "100%" }}
+              className="solarpanelImage"
               src={inverterImage[inverter]}
               alt="inverter-image"
             />

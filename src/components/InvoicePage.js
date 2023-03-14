@@ -68,95 +68,68 @@ const InvoicePage = () => {
     setInverter(e.target.value);
   };
 
-  const generatePdf = () => {
-    var doc = new jsPDF({
-      orientation: "p",
-      unit: "pt",
-      format: "c1",
-    });
-    doc.html(document.querySelector("#main"), {
-      callback: function (pdf) {
-        pdf.save("invoice.pdf");
-      },
-    });
-  };
-
-  // const exportPdf = () => {
-  //   const input = document.getElementById("main")
-  //   html2canvas(input, {logging: true, letterRendering: 2, useCORS: true}).then(canvas =>{
-  //     const imgWidth = 308;
-  //     const imgHeight = canvas.height * imgWidth / canvas.width;
-  //     const imgData = canvas.toDataURL('img/png');
-  //     const pdf = new jsPDF("p", "pt", "a4");
-  //     pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-  //     pdf.save("test.pdf");
-  //   })
-  // }
-
-  // const exportPdf = () => {
-  //   const input = document.getElementById("main");
-  //   const pdf = new jsPDF();
-  //   const pageWidth = pdf.internal.pageSize.getWidth();
-  //   const pageHeight = pdf.internal.pageSize.getHeight();
-  //   html2canvas(input, {logging: true, letterRendering: 2, useCORS: true}).then(canvas =>{
-  //     const imgWidth = pageWidth;
-  //     const imgHeight = canvas.height * imgWidth / canvas.width;
-  //     const imgData = canvas.toDataURL('image/png');
-  //     let yOffset = 0;
-  //     const pageData = canvas.toDataURL('image/jpeg', 1.0);
-  //     const totalPages = Math.ceil(canvas.height / pageHeight);
-  //     for(let i = 1; i <= totalPages; i++) {
-  //       pdf.addImage(pageData, 'JPEG', 0, yOffset, imgWidth, imgHeight);
-  //       yOffset -= pageHeight;
-  //       if(i !== totalPages) {
-  //         pdf.addPage();
-  //       }
-  //     }
-  //     pdf.save("test.pdf");
-  //   });
-  // };
+  
 
   const exportPdf = () => {
-    const input = document.getElementById("main");
-    const pdf = new jsPDF({ compress: true });
+    const pdf = new jsPDF("p", "mm", [210, 297],{ compress: true } );
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const htmlContent = input.innerHTML.trim(); // Trim the HTML content
-    html2canvas(input, {
+    const sections = document.querySelectorAll(".section"); // Get all the sections
+  
+    pdf.setFont("helvetica", "", "StandardEncoding"); // Use Standard Encoding for text compression
+  
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+const addSectionToPdf = (section) => {
+  return new Promise((resolve, reject) => {
+    const htmlContent = section.innerHTML.trim();
+    const sectionHeight = section.offsetHeight;
+    let settings = {
       logging: true,
       letterRendering: 1,
       useCORS: true,
       scrollY: -window.scrollY,
       dpi: 300,
-      
-    }).then((canvas) => {
+      scale: 1,
+    };
+    if (isMobile) {
+      // Apply different settings for mobile devices
+      settings.dpi = 600;
+      settings.scale = 2;
+      settings.useCORS = false;
+    }
+    html2canvas(section, settings).then((canvas) => {
       const imgWidth = pageWidth;
-      const imgHeight = (9500 * imgWidth) / canvas.width;
-      const imgData = canvas.toDataURL("image/png", 0.5); // Use a quality of 0.5 (50%)
-      let yOffset = 0;
+      const imgHeight = (sectionHeight * imgWidth) / canvas.width;
+      const imgData = canvas.toDataURL("image/png", 0.5);
       const pageData = canvas.toDataURL("image/jpeg", 1.0);
-      const totalPages = Math.ceil(13000 / 1500);
-      pdf.setFont("helvetica", "", "StandardEncoding"); // Use Standard Encoding for text compression
-      for (let i = 1; i < totalPages; i++) {
-        pdf.addImage(pageData, "JPEG", 0, yOffset, imgWidth, imgHeight);
-        yOffset -= pageHeight;
-        if (i <= totalPages) {
-          pdf.addPage();
-        }
-      }
-      pdf.save("invoice.pdf");
-      console.log(canvas.height);
-      console.log(pageHeight);
+      const scale = pageWidth / canvas.width * settings.scale;
+      pdf.addImage(pageData, "PNG", 0, 0, 211, 298, null, null, null, null, null, { scale });
+      resolve();
     });
-  };
+  });
+};
 
-  const handlePrint = () => {
-    window.print();
+  
+    const addSectionsToPdf = (sectionsArray, index, pageCount) => {
+      if (index >= sectionsArray.length || pageCount >= 6) { // stop after adding 6 sections
+        pdf.save("document.pdf");
+        return;
+      }
+      addSectionToPdf(sectionsArray[index]).then(() => {
+        pdf.addPage();
+        addSectionsToPdf(sectionsArray, index + 1, pageCount + 1); // increment the pageCount
+      });
+    };
+    
+    addSectionsToPdf(sections, 0, 0); // start with pageCount 0
   };
+  
 
   return (
     <div className="Invoice-main">
       <div id="main">
+        <div className="section">
         <div className="section_1">
           <div className="section_1-header">
             <img
@@ -193,6 +166,8 @@ const InvoicePage = () => {
             />
           </div>
         </div>
+        </div>
+        <div className="section">
         <div className="section_2">
           <div className="section_2-header">
             <div className="header-left-line"></div>
@@ -261,6 +236,8 @@ const InvoicePage = () => {
             <input type="file" id="file-upload" name="file-upload" />
           </div>
         </div>
+        </div>
+        <div className="section">
         <div className="section_3">
           <div className="section_3-header">
             <div className="header-left-line"></div>
@@ -270,7 +247,7 @@ const InvoicePage = () => {
             <div className="header-right-line"></div>
           </div>
           <div className="section_3-text-1">NOTRE OFFRE EN INJECTION:</div>
-          <div className="section_3-text-1">DETAIL TECHNIQUE SOLAIRE:</div>
+          <div className="section_3-text-2">DETAIL TECHNIQUE SOLAIRE:</div>
           <div className="section_3-select-div">
             PANNEAU SOLAIRE &nbsp;
             <select onChange={panelHandler} className="onchange-filter">
@@ -328,6 +305,8 @@ const InvoicePage = () => {
             <img src={image69} alt="solar panel" className="section_3-image" />
           </div>
         </div>
+        </div>
+        <div className="section">
         <div className="section_4">
           <div className="section_3-header">
             <div className="header-left-line"></div>
@@ -426,7 +405,9 @@ const InvoicePage = () => {
             </div>
           </div>
         </div>
-        <div>
+        </div>
+        
+        <div className="section">
           {solarPanelImage[panel] && (
             <img
               style={{ width: "100%" }}
@@ -442,6 +423,7 @@ const InvoicePage = () => {
             />
           )}
         </div>
+        <div className="section">
         <div className="section_5">
           <div
             style={{
@@ -450,7 +432,7 @@ const InvoicePage = () => {
               paddingBottom: 0,
             }}
           >
-            <img src={image09} style={{ width: "100%", height: "120vh" }} />
+            <img src={image09} className="section_5-image" />
             <div
               style={{
                 // display: 'flex',
@@ -471,6 +453,8 @@ const InvoicePage = () => {
             
           </div>
         </div>
+        </div>
+        
       </div>
       <div className="button-div">
         <button className="download-button" onClick={() => exportPdf()}>

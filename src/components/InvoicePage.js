@@ -108,7 +108,7 @@ const InvoicePage = () => {
     };
     
     const addSectionsToPdf = (sectionsArray, index, pageCount) => {
-      if (index >= sectionsArray.length || pageCount >= 6) { // stop after adding 6 sections
+      if (index >= sectionsArray.length || pageCount >= 7) { // stop after adding 6 sections
         pdf.save("document.pdf");
         return;
       }

@@ -70,6 +70,57 @@ const InvoicePage = () => {
 
   
 
+  // const exportPdf = () => {
+  //   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+  //   const pdf = new jsPDF("p", "mm", [210, 297],{ compress: true } );
+  //   const pageWidth = pdf.internal.pageSize.getWidth();
+  //   const pageHeight = pdf.internal.pageSize.getHeight();
+  //   const sections = document.querySelectorAll(".section"); // Get all the sections
+    
+  //   pdf.setFont("helvetica", "", "StandardEncoding"); // Use Standard Encoding for text compression
+    
+  //   const addSectionToPdf = (section) => {
+  //     return new Promise((resolve, reject) => {
+  //       const htmlContent = section.innerHTML.trim(); // Trim the HTML content
+  //       const sectionHeight = section.offsetHeight;
+        
+  //       // Set image quality and scale factor based on device type
+  //       const imgQuality = isMobile ? 2 : 0.5;
+  //       const scale = isMobile ? 3 : pageWidth / section.offsetWidth;
+        
+  //       html2canvas(section, {
+  //         logging: true,
+  //         letterRendering: 1,
+  //         useCORS: true,
+  //         scrollY: -window.scrollY,
+  //         dpi: isMobile ? 600 : 300, // Set dpi based on device type
+  //       }).then((canvas) => {
+  //         const imgWidth = pageWidth;
+  //         const imgHeight = (sectionHeight * imgWidth) / canvas.width;
+  //         const imgData = canvas.toDataURL("image/png", imgQuality);
+  //         const pageData = canvas.toDataURL("image/jpeg", 1.0);
+          
+  //         pdf.addImage(pageData.split(',')[1], "JPEG", 0, 0, pageWidth, pageHeight, null, null, null, null, null, { scale });
+  //         resolve();
+  //       });
+  //     });
+  //   };
+    
+  //   const addSectionsToPdf = (sectionsArray, index, pageCount) => {
+  //     if (index >= sectionsArray.length || pageCount >= 7) { // stop after adding 6 sections
+  //       pdf.save("document.pdf");
+  //       return;
+  //     }
+  //     addSectionToPdf(sectionsArray[index]).then(() => {
+  //       pdf.addPage();
+  //       addSectionsToPdf(sectionsArray, index + 1, pageCount + 1); // increment the pageCount
+  //     });
+  //   };
+    
+  //   addSectionsToPdf(sections, 0, 0); // start with pageCount 0
+  // };
+  
   const exportPdf = () => {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
@@ -109,6 +160,10 @@ const InvoicePage = () => {
     
     const addSectionsToPdf = (sectionsArray, index, pageCount) => {
       if (index >= sectionsArray.length || pageCount >= 7) { // stop after adding 6 sections
+        const totalPages = pdf.internal.getNumberOfPages();
+        if (totalPages > 0) {
+            pdf.deletePage(totalPages); // Delete the last blank page
+        }
         pdf.save("document.pdf");
         return;
       }
@@ -119,8 +174,8 @@ const InvoicePage = () => {
     };
     
     addSectionsToPdf(sections, 0, 0); // start with pageCount 0
-  };
-  
+};
+
   
 
   return (

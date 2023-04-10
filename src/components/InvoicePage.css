@@ -328,6 +328,227 @@
   background-color: rgb(28, 28, 28);
 }
 
+@media screen and (max-width: 2565px) {
+  /* 1st screen */
+  .section_1{
+    height: 160vh;
+  }
+  .section_1-header {
+    width: 100vw;
+    height: 45vh;
+  }
+  .section_1-header-image {
+    width: 100vw;
+    height: 45vh;
+  }
+  .section_1-main {
+    background-color: rgb(79, 175, 11);
+    width: 80vw;
+    height: 35vh;
+  }
+  .section_1-footer {
+    width: 100vw;
+    height: 80vh;
+  }
+  .section_1-footer-image {
+    width: 100vw;
+    height: 80vh;
+  }
+
+  /* 2nd Screen */
+  .section_2 {
+    margin-top: 0vh;
+    background-color: rgb(28, 28, 28);
+    width: 100vw;
+    height: 160vh;
+  }
+  .section_2-main-text {
+    margin-left: 7vw;
+    margin-top: 20vh;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .section_2-box-header {
+    margin-left: 7vw;
+    margin-top: 10vh;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .section_2-box {
+    margin-left: 9vw;
+    margin-top: 6vh;
+    width: 35vw;
+    height: 70vh;
+    background-color: rgb(79, 175, 11);
+  }
+  .section_2-box-top-text {
+    margin-left: 3vw;
+    padding-top: 4vh;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .section_2-box-1-input {
+    margin-top: 6vh;
+    margin-left: 3vw;
+    width: 14vw;
+    height: 4vh;
+    border-radius: 10px;
+  }
+  .section_2-box-1-text {
+    margin-top: 6vh;
+    margin-left: 1vw;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+  .upload-image-div {
+    width: 35vw;
+    display: flex;
+    position: absolute;
+    left: 55vw;
+    top: 240vh;
+  }
+
+  /* 3rd screen */
+  .section_3 {
+    background-color: rgb(28, 28, 28);
+    width: 100vw;
+    height: 160vh;
+  }
+  .section_3-text-1 {
+    margin-left: 7vw;
+    margin-top: 10vh;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .section_3-text-2 {
+    margin-left: 7vw;
+    margin-top: 5vh;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .section_3-select-div {
+    margin-left: 7vw;
+    margin-top: 3vh;
+    display: flex;
+  }
+  .section_3-image-div {
+    margin-top: 5vh;
+    margin-left: 15vw;
+    padding-bottom: 2vh;
+  }
+  .section_3-image {
+    width: 70vw;
+    height: 60vw;
+  }
+
+  /* 4th screen */
+
+  .section_4 {
+    background-color: rgb(28, 28, 28);
+    width: 100vw;
+    height: 160vh;
+  }
+  .section_4-header-div {
+    display: flex;
+    margin-top: 10vh;
+  }
+  .section_4-main-div {
+    width: 100vw;
+    height: 12vh;
+    margin-top: 5vh;
+    background-color: rgb(79, 175, 11);
+    display: flex;
+  }
+  .section_4-footer-text {
+    padding: 6%;
+    margin-top: 5vh;
+  }
+  .section_4-footer {
+    display: flex;
+    margin-left: 20vw;
+    margin-top: 5vh;
+  }
+  .section_4-main-div-1 {
+    width: 70vw;
+    height: 11vh;
+    background-color: rgb(28, 28, 28);
+    margin-top: 1vh;
+  }
+  .section_4-main-div2 {
+    width: 100vw;
+    height: 12vh;
+    margin-top: 0vh;
+    background-color: rgb(79, 175, 11);
+    display: flex;
+  }
+  .section_4-main-div-2 {
+    width: 70vw;
+    height: 11vh;
+    background-color: rgb(28, 28, 28);
+    margin-top: 1vh;
+  }
+  .section_4-main-div3 {
+    width: 100vw;
+    height: 14vh;
+    margin-top: 0vh;
+    background-color: rgb(79, 175, 11);
+    display: flex;
+  }
+  .section_4-main-div-3 {
+    width: 70vw;
+    height: 13vh;
+    background-color: rgb(28, 28, 28);
+    margin-top: 1vh;
+  }
+  .section_4-main-div4 {
+    width: 100vw;
+    height: 16vh;
+    margin-top: 0vh;
+    background-color: rgb(79, 175, 11);
+    display: flex;
+  }
+  .section_4-main-div-4 {
+    width: 70vw;
+    height: 15vh;
+    background-color: rgb(28, 28, 28);
+    margin-top: 1vh;
+  }
+  .section_4-main-div5 {
+    width: 100vw;
+    height: 16vh;
+    margin-top: 0vh;
+    background-color: rgb(79, 175, 11);
+    display: flex;
+  }
+  .section_4-main-div-5 {
+    width: 70vw;
+    height: 14vh;
+    background-color: rgb(28, 28, 28);
+    margin-top: 1vh;
+  }
+
+  /* 5th screen */
+  .section_5 {
+    background-color: rgb(28, 28, 28);
+    width: 100vw;
+    height: 160vh;
+  }
+  .section_5-input {
+    border-radius: 8px;
+    width: 20vw;
+    height: 5vh;
+    padding: 1%;
+  }
+  .section_5-image{
+    width: 100%;
+    height: 120vh;
+  }
+  .solarpanelImage{
+    width: 100%;
+    height: 120vh;
+  }
+}
+
 @media screen and (max-width: 1450px) {
   /* 1st screen */
   .section_1 {

@@ -456,13 +456,19 @@ const InvoicePage = () => {
         </div>
         
       </div>
-      <div className="button-div">
+      {
+        inverterImage[inverter] && solarPanelImage[panel] ? <div className="button-div">
         <button className="download-button" onClick={() => exportPdf()}>
           Export Invoice
         </button>
-      </div>
+      </div> : null
+      }
+      
     </div>
   );
 };
 
 export default InvoicePage;
+
+
+

@@ -19,6 +19,7 @@ import image09 from "../assets/image09.png";
 import "../components/InvoicePage.css";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import logo from "../assets/logo-Youblock.png";
 
 const inverterImage = {
   "hpk single phase 1mppt": hpk,
@@ -70,59 +71,29 @@ const InvoicePage = () => {
 
   
 
-  // const exportPdf = () => {
-  //   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-  //   const pdf = new jsPDF("p", "mm", [210, 297],{ compress: true } );
-  //   const pageWidth = pdf.internal.pageSize.getWidth();
-  //   const pageHeight = pdf.internal.pageSize.getHeight();
-  //   const sections = document.querySelectorAll(".section"); // Get all the sections
-    
-  //   pdf.setFont("helvetica", "", "StandardEncoding"); // Use Standard Encoding for text compression
-    
-  //   const addSectionToPdf = (section) => {
-  //     return new Promise((resolve, reject) => {
-  //       const htmlContent = section.innerHTML.trim(); // Trim the HTML content
-  //       const sectionHeight = section.offsetHeight;
-        
-  //       // Set image quality and scale factor based on device type
-  //       const imgQuality = isMobile ? 2 : 0.5;
-  //       const scale = isMobile ? 3 : pageWidth / section.offsetWidth;
-        
-  //       html2canvas(section, {
-  //         logging: true,
-  //         letterRendering: 1,
-  //         useCORS: true,
-  //         scrollY: -window.scrollY,
-  //         dpi: isMobile ? 600 : 300, // Set dpi based on device type
-  //       }).then((canvas) => {
-  //         const imgWidth = pageWidth;
-  //         const imgHeight = (sectionHeight * imgWidth) / canvas.width;
-  //         const imgData = canvas.toDataURL("image/png", imgQuality);
-  //         const pageData = canvas.toDataURL("image/jpeg", 1.0);
-          
-  //         pdf.addImage(pageData.split(',')[1], "JPEG", 0, 0, pageWidth, pageHeight, null, null, null, null, null, { scale });
-  //         resolve();
-  //       });
-  //     });
-  //   };
-    
-  //   const addSectionsToPdf = (sectionsArray, index, pageCount) => {
-  //     if (index >= sectionsArray.length || pageCount >= 7) { // stop after adding 6 sections
-  //       pdf.save("document.pdf");
-  //       return;
-  //     }
-  //     addSectionToPdf(sectionsArray[index]).then(() => {
-  //       pdf.addPage();
-  //       addSectionsToPdf(sectionsArray, index + 1, pageCount + 1); // increment the pageCount
-  //     });
-  //   };
-    
-  //   addSectionsToPdf(sections, 0, 0); // start with pageCount 0
-  // };
-  
   const exportPdf = () => {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    const getDeviceType = () => {
+      if (typeof navigator !== 'undefined') {
+        const ua = navigator.userAgent;
+        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+          return 'tablet';
+        }
+        if (
+          /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+            ua,
+          ) &&
+          // eslint-disable-next-line no-restricted-globals
+          screen?.width <= 767
+        ) {
+          return 'mweb';
+        }
+    
+        return 'web';
+      }
+    
+      return null;
+    }
     
     const pdf = new jsPDF("p", "mm", [210, 297],{ compress: true } );
     const pageWidth = pdf.internal.pageSize.getWidth();
@@ -137,23 +108,58 @@ const InvoicePage = () => {
         const sectionHeight = section.offsetHeight;
         
         // Set image quality and scale factor based on device type
-        const imgQuality = isMobile ? 2 : 0.5;
-        const scale = isMobile ? 3 : pageWidth / section.offsetWidth;
-        
+        const imgQuality =getDeviceType() === 'mweb' ? 2 : 1
+        let scale;
+    if (getDeviceType() === 'mweb') {
+      // For mobile devices, set a fixed scale factor to prevent stretching
+      scale = Math.min(1.5, pageWidth / section.offsetWidth);
+    } else {
+      // For other devices, use the section width to determine the scale factor
+      scale = pageWidth / section.offsetWidth;
+    } 
         html2canvas(section, {
           logging: true,
           letterRendering: 1,
           useCORS: true,
           scrollY: -window.scrollY,
-          dpi: isMobile ? 600 : 300, // Set dpi based on device type
+          dpi: getDeviceType() === 'mweb' ? 300 * window.devicePixelRatio : 150, // Set dpi based on device type
+          scale: getDeviceType() === 'mweb' ? 5 : 1,
         }).then((canvas) => {
           const imgWidth = pageWidth;
           const imgHeight = (sectionHeight * imgWidth) / canvas.width;
           const imgData = canvas.toDataURL("image/png", imgQuality);
           const pageData = canvas.toDataURL("image/jpeg", 1.0);
-          
-          pdf.addImage(pageData.split(',')[1], "JPEG", 0, 0, pageWidth, pageHeight, null, null, null, null, null, { scale });
+          if(getDeviceType() === 'mweb'){
+
+            const marginTop = 10;
+            const marginRight = 10;
+            const marginBottom = 10;
+            const marginLeft = 10;
+
+            // Calculate the new placement and size values
+            const x = marginLeft;
+            const y = marginTop;
+            const width = pageWidth - marginLeft - marginRight;
+            const height = pageHeight - marginTop - marginBottom;
+
+            pdf.addImage(pageData.split(',')[1], "JPEG", x, y, width, height, null, null, null, null, null, { scale });
           resolve();
+          }else{
+            const marginTop = 10;
+            const marginRight = 10;
+            const marginBottom = 10;
+            const marginLeft = 10;
+
+            // Calculate the new placement and size values
+            const x = marginLeft;
+            const y = marginTop;
+            const width = pageWidth - marginLeft - marginRight;
+            const height = pageHeight - marginTop - marginBottom;
+
+            pdf.addImage(pageData.split(',')[1], "JPEG",  x, y, width, height, null, null, null, null, null, { scale });
+          resolve();
+          }
+          
         });
       });
     };
@@ -161,12 +167,18 @@ const InvoicePage = () => {
     const addSectionsToPdf = (sectionsArray, index, pageCount) => {
       if (index >= sectionsArray.length || pageCount >= 7) { // stop after adding 6 sections
         const totalPages = pdf.internal.getNumberOfPages();
+        for(let i=1; i<=totalPages; i++){
+          pdf.setPage(i);
+          pdf.setFontSize(10);
+          pdf.text(`Page ${i}`, pageWidth - 20, pageHeight - 5); // add page number to footer
+        }
         if (totalPages > 0) {
             pdf.deletePage(totalPages); // Delete the last blank page
         }
         pdf.save("document.pdf");
         return;
       }
+        
       addSectionToPdf(sectionsArray[index]).then(() => {
         pdf.addPage();
         addSectionsToPdf(sectionsArray, index + 1, pageCount + 1); // increment the pageCount
@@ -174,8 +186,9 @@ const InvoicePage = () => {
     };
     
     addSectionsToPdf(sections, 0, 0); // start with pageCount 0
-};
+  };
 
+  // eslint-disable-next-line
   
 
   return (
@@ -216,6 +229,12 @@ const InvoicePage = () => {
               className="section_1-footer-image"
               alt="footerImage"
             />
+          </div>
+          <div className="section_1-logo">
+            <img
+            src={logo}
+            className="section_1-logo-image"
+            alt="logo" />
           </div>
         </div>
         </div>
@@ -287,6 +306,12 @@ const InvoicePage = () => {
             <label for="file-upload">Uplaod Image:</label>
             <input type="file" id="file-upload" name="file-upload" />
           </div>
+          <div className="section_2-logo">
+            <img
+            src={logo}
+            className="section_1-logo-image"
+            alt="logo" />
+          </div>
         </div>
         </div>
         <div className="section">
@@ -356,6 +381,12 @@ const InvoicePage = () => {
           <div className="section_3-image-div">
             <img src={image69} alt="solar panel" className="section_3-image" />
           </div>
+          <div className="section_3-logo">
+            <img
+            src={logo}
+            className="section_1-logo-image"
+            alt="logo" />
+          </div>
         </div>
         </div>
         <div className="section">
@@ -387,7 +418,7 @@ const InvoicePage = () => {
               <div className="section_4-text">
                 PANNEAUX : &nbsp;<span>{pvSystem.power}00</span>&nbsp;Wc soit{" "}
                 {pvSystem.numberOfMods} &nbsp; Monocristallin 420 Wc (minimum){" "}
-                <input type="text" /> , garantie produit 25 ans et rentabilité
+                <input type="text" className="onchange-filter" /> , garantie produit 25 ans et rentabilité
                 84,8% à 25 ans éco participation comprise. Bilan carbone
                 fournis.{" "}
               </div>
@@ -399,7 +430,7 @@ const InvoicePage = () => {
             <div className="section_4-main-div-3">
               <div className="section_4-text">
                 POSE INTÉGRATION ''SIMPLIFÉE'' : sur toiture plate avec membrane
-                bitumeuse <input type="text" />
+                bitumeuse <input type="text" className="onchange-filter" />
                 m2 ( hors chemin technique)). Fourniture du système de fixation
                 en fonction de la membrane (sous atec). Pose des plots par un
                 étancheur à prévoir Montage des modules Assurance RC et
@@ -455,6 +486,12 @@ const InvoicePage = () => {
               <input className="section_4-footer-horizontal-bar-input" />
               <input className="section_4-footer-horizontal-bar-input" />
             </div>
+          </div>
+          <div className="section_4-logo">
+            <img
+            src={logo}
+            className="section_1-logo-image"
+            alt="logo" />
           </div>
         </div>
         </div>

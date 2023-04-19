@@ -45,12 +45,14 @@
   width: 10vw;
   height: 4vh;
   border-radius: 8px;
+  overflow: visible;
 }
 .section_1-main-lowertext-input-2 {
   margin-top: 5vh;
   width: 14vw;
   height: 4vh;
   border-radius: 8px;
+  overflow: visible;
 }
 .section_1-footer {
   width: 100vw;
@@ -128,6 +130,7 @@
   width: 14vw;
   height: 4vh;
   border-radius: 10px;
+  overflow: visible;
 }
 .section_2-box-1-text {
   margin-top: 3vh;
@@ -264,6 +267,7 @@
   width: 12vw;
   height: 4vh;
   border-radius: 10px;
+  overflow: visible;
 }
 .section_4-main-input-text {
   margin-top: 5vh;
@@ -300,6 +304,7 @@
   width: 12vw;
   border-radius: 7px;
   margin-left: 2vw;
+  overflow: visible;
 }
 .section_5 {
   background-color: rgb(28, 28, 28);
@@ -311,6 +316,7 @@
   width: 20vw;
   height: 5vh;
   padding: 1%;
+  overflow: visible;
 }
 .download-button {
   text-align: center;
@@ -326,6 +332,26 @@
 .button-div {
   width: 100vw;
   background-color: rgb(28, 28, 28);
+}
+.section_1-logo{
+  margin-left: 33vw;
+  margin-top: 5vh;
+}
+.section_1-logo-image{
+  width: 30vw;
+  height: 30vh;
+}
+.section_2-logo{
+  margin-left: 33vw;
+  margin-top: 20vh;
+}
+.section_3-logo{
+  margin-left: 33vw;
+  margin-top: 2vh;
+}
+.section_4-logo{
+  margin-left: 33vw;
+  margin-top: 12vh;
 }
 
 @media screen and (max-width: 2565px) {
@@ -393,6 +419,7 @@
     width: 14vw;
     height: 4vh;
     border-radius: 10px;
+    overflow: visible;
   }
   .section_2-box-1-text {
     margin-top: 6vh;
@@ -672,7 +699,7 @@
   }
   .section_4-main-div {
     width: 100vw;
-    height: 16vh;
+    height: 12vh;
     margin-top: 15vh;
     background-color: rgb(79, 175, 11);
     display: flex;
@@ -712,71 +739,80 @@
 @media screen and (max-width: 435px) {
   /* 1st section */
   .section_1 {
-    height: 95vh;
+    height: 110vh;
     background-color: rgb(28, 28, 28);
+
   }
   .section_1-header {
     width: 100vw;
-    height: 25vh;
+    height: 22vh;
   }
   .section_1-header-image {
     width: 100vw;
-    height: 25vh;
+    height: 22vh;
   }
   .section_1-main {
     background-color: rgb(79, 175, 11);
     width: 80vw;
-    height: 25vh;
+    height: 26vh;
   }
   .section_1-footer {
     width: 100vw;
-    height: 35vh;
+    height: 45vh;
   }
   .section_1-footer-image {
     width: 100vw;
-    height: 35vh;
+    height: 45vh;
   }
   .section_1-main-uppertext {
-    margin-left: 7vw;
+    margin-left: 5vw;
     padding-top: 3vh;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.6rem;
+    font-weight: 500;
   }
   .section_1-main-divider {
     height: 0.5vh;
     width: 40vw;
     background-color: white;
-    margin-left: 7vw;
+    margin-left: 5vw;
     margin-top: 2vh;
   }
   .section_1-main-lowertext {
-    margin-left: 7vw;
+    margin-left: 5vw;
     margin-top: 2vh;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.6rem;
+    font-weight: 500;
   }
   .section_1-main-lowertext-input {
     margin-left: 2vw;
-    width: 25vw;
+    width: 16vw;
     height: 3vh;
     border-radius: 8px;
   }
   .section_1-main-lowertext-input-2 {
-    margin-top: 3vh;
-    width: 34vw;
+    margin-top: 2vh;
+    width: 155px;
     height: 3vh;
     border-radius: 8px;
+  }
+  .section_1-logo{
+    margin-left: 33vw;
+    margin-top: 5vh;
+  }
+  .section_1-logo-image{
+    width: 30vw;
+    height: 10vh;
   }
 
   /* 2nd section */
   .section_2 {
-    margin-top: 0vh;
+    margin-top: -4vh;
     background-color: rgb(28, 28, 28);
     width: 100vw;
-    height: 95vh;
+    height: 110vh;
   }
   .section_2-header {
-    margin-top: 0vh;
+    margin-top: -4vh;
     display: flex;
     flex-direction: row;
   }
@@ -790,27 +826,27 @@
   .section_2-main-text {
     margin-left: 7vw;
     margin-top: 3vh;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.6rem;
+    font-weight: 500;
   }
   .section_2-box-header {
     margin-left: 7vw;
-    margin-top: 3vh;
-    font-size: 0.9rem;
-    font-weight: 400;
+    margin-top: 5vh;
+    font-size: 0.6rem;
+    font-weight: 500;
   }
   .section_2-box {
     margin-left: 15vw;
-    margin-top: 3vh;
-    width: 70vw;
-    height: 45vh;
+    margin-top: 8vh;
+    width: 60vw;
+    height: 40vh;
     background-color: rgb(79, 175, 11);
   }
   .section_2-box-top-text {
     margin-left: 3vw;
     padding-top: 1vh;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
   .section_2-box-1-input {
     margin-top: 2vh;
@@ -822,57 +858,75 @@
   .section_2-box-1-text {
     margin-top: 2.5vh;
     margin-left: 1vw;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 400;
   }
   .upload-image-div {
-    width: 80vw;
+    width: 70vw;
     display: flex;
     position: absolute;
     left: 10vw;
-    top: 170vh;
+    top: 185vh;
   }
+  .section_2-logo{
+    margin-left: 33vw;
+    margin-top: 25vh;
+  }
+  
+  
   /* 3rd section */
   .section_3 {
     background-color: rgb(28, 28, 28);
     width: 100vw;
-    height: 140vh;
+    height: 110vh;
   }
   .section_3-text-1 {
     margin-left: 7vw;
-    margin-top: 5vh;
-    font-size: 1rem;
-    font-weight: 700;
+    margin-top: 4vh;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
   .section_3-text-2 {
     margin-left: 7vw;
-    margin-top: 4vh;
-    font-size: 1rem;
-    font-weight: 700;
+    margin-top: 2vh;
+    font-size: 0.8rem;
+    font-weight: 500;
   }
   .section_3-select-div {
     margin-left: 7vw;
     margin-top: 4vh;
     display: flex;
+    font-size: 0.6rem;
+    font-weight: 400;
   }
   .onchange-filter {
     width: 18vw;
-    height: 3vh;
+    height: 4vh;
+    padding: 8px;
+  }
+  .section_3-list-div{
+    font-size: 0.6rem;
+    margin-top: 2vh;
   }
   .section_3-image-div {
-    margin-top: 8vh;
-    margin-left: 10vw;
+    margin-top: 5vh;
+    margin-left: 15vw;
     padding-bottom: 2vh;
   }
   .section_3-image {
-    width: 80vw;
-    height: 100vw;
+    width: 70vw;
+    height: 90vw;
   }
+  .section_3-logo{
+    margin-left: 33vw;
+    margin-top: 10vh;
+  }
+  
   /* 4th section */
   .section_4 {
     background-color: rgb(28, 28, 28);
     width: 100vw;
-    height: 140vh;
+    height: 110vh;
   }
   .section_4-header-div {
     display: flex;
@@ -880,80 +934,80 @@
   }
   .section_4-header-bar {
     width: 7vw;
-    height: 3vh;
+    height: 2.5vh;
     background-color: rgb(79, 175, 11);
   }
   .section_4-header-text {
-    font-size: 1rem;
-    font-weight: 800;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
   .section_4-main-div {
     width: 100vw;
-    height: 12vh;
+    height: 10vh;
     margin-top: 3vh;
     background-color: rgb(79, 175, 11);
     display: flex;
   }
   .section_4-main-div-1 {
     width: 70vw;
-    height: 11vh;
+    height: 9vh;
     background-color: rgb(28, 28, 28);
     margin-top: 1vh;
   }
   .section_4-main-div2 {
     width: 100vw;
-    height: 14vh;
+    height: 12vh;
     margin-top: 0vh;
     background-color: rgb(79, 175, 11);
     display: flex;
   }
   .section_4-main-div-2 {
     width: 70vw;
-    height: 13vh;
+    height: 11vh;
     background-color: rgb(28, 28, 28);
     margin-top: 1vh;
   }
   .section_4-main-div3 {
-    width: 100vw;
-    height: 18vh;
-    margin-top: 0vh;
-    background-color: rgb(79, 175, 11);
-    display: flex;
-  }
-  .section_4-main-div-3 {
-    width: 70vw;
-    height: 17vh;
-    background-color: rgb(28, 28, 28);
-    margin-top: 1vh;
-  }
-  .section_4-main-div4 {
-    width: 100vw;
-    height: 18vh;
-    margin-top: 0vh;
-    background-color: rgb(79, 175, 11);
-    display: flex;
-  }
-  .section_4-main-div-4 {
-    width: 70vw;
-    height: 17vh;
-    background-color: rgb(28, 28, 28);
-    margin-top: 1vh;
-  }
-  .section_4-main-div5 {
     width: 100vw;
     height: 16vh;
     margin-top: 0vh;
     background-color: rgb(79, 175, 11);
     display: flex;
   }
-  .section_4-main-div-5 {
+  .section_4-main-div-3 {
+    width: 70vw;
+    height: 15vh;
+    background-color: rgb(28, 28, 28);
+    margin-top: 1vh;
+  }
+  .section_4-main-div4 {
+    width: 100vw;
+    height: 15vh;
+    margin-top: 0vh;
+    background-color: rgb(79, 175, 11);
+    display: flex;
+  }
+  .section_4-main-div-4 {
     width: 70vw;
     height: 14vh;
     background-color: rgb(28, 28, 28);
     margin-top: 1vh;
   }
+  .section_4-main-div5 {
+    width: 100vw;
+    height: 13vh;
+    margin-top: 0vh;
+    background-color: rgb(79, 175, 11);
+    display: flex;
+  }
+  .section_4-main-div-5 {
+    width: 70vw;
+    height: 11vh;
+    background-color: rgb(28, 28, 28);
+    margin-top: 1vh;
+  }
   .section_4-text {
-    margin-top: 2vh;
+    margin-top: 1vh;
     margin-left: 1vw;
     font-size: 0.6rem;
   }
@@ -963,27 +1017,28 @@
     width: 16vw;
     height: 4vh;
     border-radius: 10px;
+    padding: 15px;
   }
   .section_4-main-input-text {
     margin-top: 5vh;
   }
   .section_4-footer-text {
-    margin-top: 1vh;
-    font-size: 0.6rem;
+    margin-top: 0vh;
+    font-size: 0.5rem;
   }
   .section_4-footer {
     display: flex;
     margin-left: 20vw;
-    margin-top: 2vh;
+    margin-top: 1vh;
   }
   .section_4-footer-bar {
     width: 1vw;
-    height: 12vh;
+    height: 10vh;
     background-color: rgb(79, 175, 11);
   }
   .section_4-footer-horizontal-bar {
     width: 50vw;
-    height: 12vh;
+    height: 11vh;
     margin-left: 10vw;
     background-color: rgb(79, 175, 11);
     flex-direction: column;
@@ -993,30 +1048,34 @@
     margin-left: 1vw;
   }
   .section_4-footer-bar-text-1 {
-    margin-top: 2vh;
-    font-size: 0.6rem;
+    margin-top: 0.2vh;
+    font-size: 0.5rem;
   }
   .section_4-footer-horizontal-bar-input {
-    margin-top: 1vh;
+    margin-top: 0.9vh;
     width: 22vw;
     border-radius: 7px;
     margin-left: 2vw;
+  }
+  .section_4-logo{
+    margin-left: 33vw;
+    margin-top: -3vh;
   }
   /* 5th section */
   .section_5 {
     background-color: rgb(28, 28, 28);
     width: 100vw;
-    height: 140vh;
+    height: 110vh;
   }
   .section_5-input {
     border-radius: 8px;
-    width: 40vw;
+    width: 35vw;
     height: 4vh;
     padding: 1%;
   }
   .section_5-image{
     width: 100%;
-    height: 80vh;
+    height: 60vh;
   }
   .download-button {
     text-align: center;
